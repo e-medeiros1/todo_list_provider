@@ -10,13 +10,12 @@ class TodoListProvider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'WiseWorkflow',
+      title: 'ToDo List',
       theme: ThemeStyle.theme,
       home: const TodoHomePage(),
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const [GlobalMaterialLocalizations.delegate],
+      supportedLocales: const [Locale('pt', 'BR'), Locale('en', 'US')],
     );
   }
 }
-
-
