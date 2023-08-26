@@ -15,15 +15,10 @@ class TodoTexts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          text,
-          style: TextStyle(fontSize: fontSize),
-          textAlign: textAlign,
-        ),
-      ),
-      body: Container(),
+    return Text(
+      text,
+      style: TextStyle(fontSize: fontSize),
+      textAlign: textAlign,
     );
   }
 }
