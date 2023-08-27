@@ -5,19 +5,21 @@ class TodoTexts extends StatelessWidget {
   final String text;
   final double fontSize;
   final TextAlign? textAlign;
+  final Color? colorText;
 
   const TodoTexts({
     Key? key,
     required this.text,
     required this.fontSize,
     this.textAlign,
+    this.colorText,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: TextStyle(fontSize: fontSize),
+      style: TextStyle(fontSize: fontSize, color: colorText),
       textAlign: textAlign,
     );
   }
