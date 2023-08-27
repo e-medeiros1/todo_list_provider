@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_list_provider/app/controllers/todo_controller.dart';
 import 'package:todo_list_provider/app/core/widgets/todo_texts.dart';
+import 'package:todo_list_provider/app/mixin/mixin_snack_bar.dart';
+import 'package:todo_list_provider/app/models/todo_model.dart';
 import 'package:todo_list_provider/app/pages/form/widgets/todo_form_field.dart';
 
 class AddTodoScreen extends StatefulWidget {
@@ -9,10 +13,51 @@ class AddTodoScreen extends StatefulWidget {
   State<AddTodoScreen> createState() => _AddTodoScreenState();
 }
 
-class _AddTodoScreenState extends State<AddTodoScreen> {
+class _AddTodoScreenState extends State<AddTodoScreen> with MixinSnackBar {
   final formKey = GlobalKey<FormState>();
-  final titleController = TextEditingController();
-  final contentController = TextEditingController();
+
+  final _titleController = TextEditingController();
+  final _titleFocus = FocusNode();
+  final _contentController = TextEditingController();
+  final _contentFocus = FocusNode();
+
+  final _dateController = TextEditingController();
+  final _dateFocus = FocusNode();
+
+  late DateTime todoDate;
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _titleFocus.dispose();
+    _contentController.dispose();
+    _contentFocus.dispose();
+    _dateController.dispose();
+    _dateFocus.dispose();
+    super.dispose();
+  }
+
+  void addTodo() async {
+    if (formKey.currentState!.validate()) {
+      final controller = context.read<TodoController>();
+      final String? error = await controller.addTodo(
+        TodoModel(
+          title: _titleController.text,
+          description: _contentController.text,
+          cDate: todoDate,
+        ),
+      );
+
+      if (context.mounted) {
+        if (error != null) {
+          showSnackBar(text: error, context: context, isError: true);
+        } else {
+          Navigator.of(context).pop();
+        }
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -31,16 +76,23 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
                 children: [
                   TodoFormField(
                     autoFocus: true,
-                    controller: titleController,
-                    focus: FocusNode(canRequestFocus: true),
+                    controller: _titleController,
+                    focus: _titleFocus,
                     label: 'Título',
                   ),
                   const SizedBox(height: 20),
                   TodoFormField(
-                    controller: contentController,
-                    focus: FocusNode(),
+                    controller: _contentController,
+                    focus: _contentFocus,
                     label: 'Descrição',
                     maxLines: 5,
+                  ),
+                  const SizedBox(height: 20),
+                  TodoFormField(
+                    controller: _dateController,
+                    focus: _dateFocus,
+                    label: 'Data',
+                    maxLines: 1,
                   ),
                   const SizedBox(height: 20),
                   ElevatedButton(
