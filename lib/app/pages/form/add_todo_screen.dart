@@ -4,7 +4,8 @@ import 'package:todo_list_provider/app/controllers/todo_controller.dart';
 import 'package:todo_list_provider/app/core/widgets/todo_texts.dart';
 import 'package:todo_list_provider/app/mixin/mixin_snack_bar.dart';
 import 'package:todo_list_provider/app/models/todo_model.dart';
-import 'package:todo_list_provider/app/pages/form/widgets/todo_form_field.dart';
+import 'package:todo_list_provider/app/pages/form/widgets/content_form_widget.dart';
+import 'package:todo_list_provider/app/pages/form/widgets/title_form_widget.dart';
 
 class AddTodoScreen extends StatefulWidget {
   const AddTodoScreen({super.key});
@@ -74,25 +75,16 @@ class _AddTodoScreenState extends State<AddTodoScreen> with MixinSnackBar {
               key: formKey,
               child: Column(
                 children: [
-                  TodoFormField(
-                    autoFocus: true,
-                    controller: _titleController,
-                    focus: _titleFocus,
-                    label: 'Título',
+                  TitleFormWidget(
+                    titleController: _titleController,
+                    titleFocus: _titleFocus,
+                    contentFocus: _contentFocus,
                   ),
                   const SizedBox(height: 20),
-                  TodoFormField(
-                    controller: _contentController,
-                    focus: _contentFocus,
-                    label: 'Descrição',
-                    maxLines: 5,
-                  ),
-                  const SizedBox(height: 20),
-                  TodoFormField(
-                    controller: _dateController,
-                    focus: _dateFocus,
-                    label: 'Data',
-                    maxLines: 1,
+                  ContentFormWidget(
+                    contentController: _contentController,
+                    contentFocus: _contentFocus,
+                    dateFocus: _dateFocus,
                   ),
                   const SizedBox(height: 20),
                   ElevatedButton(

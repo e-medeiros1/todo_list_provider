@@ -14,6 +14,7 @@ class TodoFormField extends StatelessWidget {
   final int? minLines;
   final void Function()? onTap;
   final bool readOnly;
+  final TextInputAction textInputAction;
 
   const TodoFormField({
     super.key,
@@ -28,6 +29,7 @@ class TodoFormField extends StatelessWidget {
     this.minLines,
     this.onTap,
     this.readOnly = false,
+    this.textInputAction = TextInputAction.next,
   });
 
   @override
