@@ -31,6 +31,7 @@ class TodoController extends ChangeNotifier {
       todoList
         ..clear()
         ..addAll(loadedTodos!);
+
       sortTodosByDate();
     }
     return error;
@@ -53,9 +54,13 @@ class TodoController extends ChangeNotifier {
     return error;
   }
 
+  Future<String?> saveTodos() async {
+    return _todoLocalStorage.setTodos(todoList);
+  }
+
   Future<String?> addTodo(TodoModel todoModel) async {
     todoList.add(todoModel);
-    final String? error = await _todoLocalStorage.setTodos(todoList);
+    final String? error = await saveTodos();
 
     if (error == null) {
       sortTodosByDate();
@@ -64,26 +69,36 @@ class TodoController extends ChangeNotifier {
     return error;
   }
 
+  // Future deleteTodos(String id) async {
+  //   final error = await _todoLocalStorage.deleteTodos(id);
+
+  //   notifyListeners();
+
+  //   return error;
+  // }
+
   bool isTodoChecked(String id) {
-    return doneTodoList.indexWhere((checked) => checked == id) != 1;
+    return doneTodoList.indexWhere((checkedTodoId) => checkedTodoId == id) !=
+        -1;
   }
 
-  Future checkTodo(String id) async {
+  Future<String?> checkTodo(String id) async {
     if (!isTodoChecked(id)) {
       doneTodoList.add(id);
     } else {
-      doneTodoList.removeWhere((element) => element == id);
+      doneTodoList.removeWhere((checkedTodoId) => checkedTodoId == id);
     }
 
     final String? error = await _todoLocalStorage.setDoneTodos(doneTodoList);
 
     if (error == null) {
+      if (isTodoChecked(id)) {
+        doneTodoList.add(id);
+      } else {
+        doneTodoList.removeWhere((checkedTodoId) => checkedTodoId == id);
+      }
+
       notifyListeners();
-    }
-    if (isTodoChecked(id)) {
-      doneTodoList.add(id);
-    } else {
-      doneTodoList.removeWhere((element) => element == id);
     }
 
     return error;
