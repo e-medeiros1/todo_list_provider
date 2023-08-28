@@ -20,7 +20,7 @@ class TodoLocalStorage {
         todos.map((todo) => todo.toMap()).toList(),
       );
 
-      await _localStorage.set(todosKey, data);
+      await _localStorage.set("todosKey", data);
 
       return null;
     } on TodoErrorMessage {
@@ -33,7 +33,7 @@ class TodoLocalStorage {
 
   Future<(String? error, List<TodoModel>? todos)> getTodos() async {
     try {
-      final String? todosJson = await _localStorage.get(todosKey);
+      final String? todosJson = await _localStorage.get("todosKey");
 
       if (todosJson != null) {
         final todos = (jsonDecode(todosJson) as List)
@@ -58,7 +58,7 @@ class TodoLocalStorage {
     try {
       final String data = jsonEncode(doneTodos);
 
-      await _localStorage.set(doneTodosKey, data);
+      await _localStorage.set("doneTodosKey", data);
 
       return null;
     } on TodoErrorMessage {
@@ -71,20 +71,37 @@ class TodoLocalStorage {
 
   Future<(String? error, List<String>? todos)> getDoneTodos() async {
     try {
-      final String? doneTodosJson = await _localStorage.get(doneTodosKey);
+      final String? doneTodosJson = await _localStorage.get("doneTodosKey");
 
       if (doneTodosJson != null) {
-        final doneTodos = (jsonDecode(doneTodosJson) as List<String>);
+        final doneTodos = (jsonDecode(doneTodosJson) as List).cast<String>();
 
         return (null, doneTodos);
       }
 
       return (null, <String>[]);
     } on TodoErrorMessage {
-      return ("Erro ao salvar tarefas prontas", null);
+      return ("Erro ao carregar tarefas prontas", null);
     } catch (e, s) {
-      log('Erro ao salvar tarefas prontas', error: e, stackTrace: s);
+      log('Erro ao carregar tarefas prontas', error: e, stackTrace: s);
       return (defaultErrorMessage, null);
     }
   }
+
+  // Future<(String? error, List<String>? todos)> deleteTodos(String id) async {
+  //   try {
+  //     final String? doneTodosJson = await _localStorage.clearTodo("doneTodosKey");
+  //      if (doneTodosJson != null) {
+  //       final doneTodos = (jsonDecode(doneTodosJson) as List).cast<String>();
+
+  //       return (null, doneTodos);
+  //     }
+  //      return (null, <String>[]);
+  //   } on TodoErrorMessage {
+  //     return ("Erro ao carregar tarefas prontas", null);
+  //   } catch (e, s) {
+  //     log('Erro ao carregar tarefas prontas', error: e, stackTrace: s);
+  //     return (defaultErrorMessage, null);
+  //   }
+  // }
 }

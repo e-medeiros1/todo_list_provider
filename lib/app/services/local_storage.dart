@@ -4,11 +4,10 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart' as Storage;
 import 'package:todo_list_provider/app/core/widgets/todo_error_message.dart';
 
 class LocalStorage {
-  static const storage = Storage.FlutterSecureStorage();
-
   Future set(String key, String? data) async {
+    const storage = Storage.FlutterSecureStorage();
     try {
-      await storage.write(key: key, value: data);
+      storage.write(key: key, value: data);
     } catch (e, s) {
       final errorMessage = "Erro ao guardar dados: $data";
       log(errorMessage, error: e, stackTrace: s);
@@ -16,9 +15,10 @@ class LocalStorage {
     }
   }
 
-  Future get(String key) async {
+  Future<String?> get(String key) async {
+    const storage = Storage.FlutterSecureStorage();
     try {
-      await storage.read(key: key);
+      return await storage.read(key: key);
     } catch (e, s) {
       final errorMessage = "Erro ao ler dados: $key";
       log(errorMessage, error: e, stackTrace: s);
@@ -26,9 +26,10 @@ class LocalStorage {
     }
   }
 
-  Future clearStorage() async {
+  Future clearTodo(String key) async {
+    const storage = Storage.FlutterSecureStorage();
     try {
-      return await storage.deleteAll();
+      return await storage.delete(key: key);
     } catch (e, s) {
       const errorMessage = "Erro ao excluir dados";
       log(errorMessage, error: e, stackTrace: s);
