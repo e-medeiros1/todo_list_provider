@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:todo_list_provider/app/core/styles/colors_style.dart';
 
 class TodoTexts extends StatelessWidget {
   final String text;
@@ -19,7 +20,7 @@ class TodoTexts extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: TextStyle(fontSize: fontSize, color: colorText),
+      style: TextStyle(fontSize: fontSize, color: context.colors.secondary),
       textAlign: textAlign,
     );
   }

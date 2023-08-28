@@ -46,10 +46,14 @@ class TodoFormField extends StatelessWidget {
       readOnly: readOnly,
       autofocus: autoFocus,
       cursorColor: context.colors.secondary,
+      style: TextStyle(color: context.colors.secondary),
       decoration: InputDecoration(
-        floatingLabelBehavior: FloatingLabelBehavior.never,
+        floatingLabelBehavior: FloatingLabelBehavior.always,
         label: TodoTexts(text: label, fontSize: 16),
-        labelStyle: const TextStyle(color: Colors.black87),
+        floatingLabelStyle: const TextStyle(fontSize: 14),
+        labelStyle: TextStyle(
+          color: context.colors.secondary,
+        ),
       ),
     );
   }

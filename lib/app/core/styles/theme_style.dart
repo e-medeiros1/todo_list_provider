@@ -11,18 +11,21 @@ class ThemeStyle {
   );
   static final _defaultFocusedInputBorder = OutlineInputBorder(
     borderRadius: BorderRadius.circular(10),
-    borderSide: BorderSide(color: ColorsStyle.instance.blue),
+    borderSide: BorderSide(color: ColorsStyle.instance.secondary, width: 2),
   );
 
   static final theme = ThemeData(
     useMaterial3: true,
-    scaffoldBackgroundColor: Colors.white,
+    scaffoldBackgroundColor: ColorsStyle.instance.primary,
     appBarTheme: AppBarTheme(
-      backgroundColor: ColorsStyle.instance.primary,
+      backgroundColor: Colors.transparent,
       elevation: 0,
+      titleTextStyle:
+          TextStyle(color: ColorsStyle.instance.secondary, fontSize: 22),
+      centerTitle: true,
       iconTheme: IconThemeData(
         color: ColorsStyle.instance.secondary,
-        size: 30,
+        size: 25,
         weight: 100,
       ),
     ),
@@ -32,7 +35,7 @@ class ThemeStyle {
       secondary: ColorsStyle.instance.secondary,
     ),
     inputDecorationTheme: InputDecorationTheme(
-      fillColor: Colors.white,
+      fillColor: ColorsStyle.instance.primary,
       filled: true,
       isDense: true,
       contentPadding: const EdgeInsets.all(20),
