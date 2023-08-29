@@ -7,12 +7,14 @@ class ContentFormWidget extends StatelessWidget {
   final TextEditingController contentController;
   final FocusNode contentFocus;
   final FocusNode dateFocus;
+  final String? initialValue;
 
   const ContentFormWidget(
       {super.key,
       required this.contentController,
       required this.contentFocus,
-      required this.dateFocus});
+      required this.dateFocus,
+      this.initialValue});
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +22,7 @@ class ContentFormWidget extends StatelessWidget {
       autoFocus: true,
       controller: contentController,
       focus: contentFocus,
+      initialValue: initialValue,
       label: 'Descrição',
       minLines: 10,
       maxLines: 15,

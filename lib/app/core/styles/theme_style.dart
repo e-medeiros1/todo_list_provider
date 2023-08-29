@@ -35,6 +35,11 @@ class ThemeStyle {
       secondary: ColorsStyle.instance.secondary,
     ),
     inputDecorationTheme: InputDecorationTheme(
+      labelStyle: TextStyle(
+        color: ColorsStyle.instance.secondary,
+      ),
+      floatingLabelStyle: TextStyle(color: ColorsStyle.instance.secondary),
+      hintStyle: TextStyle(color: ColorsStyle.instance.secondary),
       fillColor: ColorsStyle.instance.primary,
       filled: true,
       isDense: true,

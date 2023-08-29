@@ -15,6 +15,7 @@ class TodoFormField extends StatelessWidget {
   final void Function()? onTap;
   final bool readOnly;
   final TextInputAction textInputAction;
+  final String? initialValue;
 
   const TodoFormField({
     super.key,
@@ -30,11 +31,13 @@ class TodoFormField extends StatelessWidget {
     this.onTap,
     this.readOnly = false,
     this.textInputAction = TextInputAction.next,
+    this.initialValue = '',
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       controller: controller,
       focusNode: focus,
       textCapitalization: textCapitalization,
@@ -47,6 +50,7 @@ class TodoFormField extends StatelessWidget {
       autofocus: autoFocus,
       cursorColor: context.colors.secondary,
       style: TextStyle(color: context.colors.secondary),
+      initialValue: initialValue,
       decoration: InputDecoration(
         floatingLabelBehavior: FloatingLabelBehavior.always,
         label: TodoTexts(text: label, fontSize: 16),

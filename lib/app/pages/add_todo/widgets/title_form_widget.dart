@@ -7,16 +7,19 @@ class TitleFormWidget extends StatelessWidget {
   final TextEditingController titleController;
   final FocusNode titleFocus;
   final FocusNode contentFocus;
+  final String? initialValue;
 
   const TitleFormWidget(
       {super.key,
       required this.titleController,
       required this.titleFocus,
-      required this.contentFocus});
+      required this.contentFocus,
+      this.initialValue});
 
   @override
   Widget build(BuildContext context) {
     return TodoFormField(
+      initialValue: initialValue,
       autoFocus: true,
       controller: titleController,
       focus: titleFocus,

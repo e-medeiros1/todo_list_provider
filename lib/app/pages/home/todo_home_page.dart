@@ -6,6 +6,7 @@ import 'package:todo_list_provider/app/core/styles/colors_style.dart';
 import 'package:todo_list_provider/app/core/widgets/todo_checkbox.dart';
 import 'package:todo_list_provider/app/core/widgets/todo_texts.dart';
 import 'package:todo_list_provider/app/pages/add_todo/add_todo_screen.dart';
+import 'package:todo_list_provider/app/pages/edit_todo/edit_todo_screen.dart';
 
 class TodoHomePage extends StatefulWidget {
   const TodoHomePage({super.key});
@@ -66,18 +67,35 @@ class _TodoHomePageState extends State<TodoHomePage> {
                             : 'Você não possui nenhuma tarefa',
                         fontSize: 18),
                   )
-                : ListView.builder(
+                : ListView.separated(
+                    separatorBuilder: (context, index) => Divider(
+                      indent: 10,
+                      endIndent: 10,
+                      color: context.colors.secondary.withOpacity(.3),
+                    ),
                     itemCount: controller.todoList.length,
                     itemBuilder: (context, index) {
                       final todo = controller.todoList[index];
                       final dateFormatted =
                           "${todo.date.day.toString()}/${todo.date.month.toString().padLeft(2, '0')}/${todo.date.year.toString().padLeft(2, '0')}";
-                      return ListTile(
-                        leading: TodoCheckbox(todo: todo),
-                        title: TodoTexts(text: todo.title, fontSize: 18),
-                        subtitle: TodoTexts(
-                            text: todo.description ?? '', fontSize: 14),
-                        trailing: TodoTexts(text: dateFormatted, fontSize: 14),
+                      return InkWell(
+                        onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => EditTodoScreen(
+                                id: todo.id,
+                                title: todo.title,
+                                content: todo.description ?? '',
+                                date: dateFormatted),
+                          ),
+                        ),
+                        child: ListTile(
+                          leading: TodoCheckbox(todo: todo),
+                          title: TodoTexts(text: todo.title, fontSize: 18),
+                          subtitle: TodoTexts(
+                              text: todo.description ?? '', fontSize: 14),
+                          trailing:
+                              TodoTexts(text: dateFormatted, fontSize: 14),
+                        ),
                       );
                     },
                   ),

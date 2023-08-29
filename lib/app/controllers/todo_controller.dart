@@ -69,6 +69,18 @@ class TodoController extends ChangeNotifier {
     return error;
   }
 
+  Future<String?> editTodo(TodoModel todoModel) async {
+    todoList.add(todoModel);
+
+    final String? error = await saveTodos();
+
+    if (error == null) {
+      sortTodosByDate();
+      notifyListeners();
+    }
+    return error;
+  }
+
   // Future deleteTodos(String id) async {
   //   final error = await _todoLocalStorage.deleteTodos(id);
 
