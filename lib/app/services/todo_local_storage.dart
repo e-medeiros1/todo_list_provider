@@ -87,21 +87,4 @@ class TodoLocalStorage {
       return (defaultErrorMessage, null);
     }
   }
-
-  // Future<(String? error, List<String>? todos)> deleteTodos(String id) async {
-  //   try {
-  //     final String? doneTodosJson = await _localStorage.clearTodo("doneTodosKey");
-  //      if (doneTodosJson != null) {
-  //       final doneTodos = (jsonDecode(doneTodosJson) as List).cast<String>();
-
-  //       return (null, doneTodos);
-  //     }
-  //      return (null, <String>[]);
-  //   } on TodoErrorMessage {
-  //     return ("Erro ao carregar tarefas prontas", null);
-  //   } catch (e, s) {
-  //     log('Erro ao carregar tarefas prontas', error: e, stackTrace: s);
-  //     return (defaultErrorMessage, null);
-  //   }
-  // }
 }

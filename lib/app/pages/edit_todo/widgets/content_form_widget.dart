@@ -18,7 +18,6 @@ class EditContentFormWidget extends StatelessWidget {
     return TextFormField(
       style: TextStyle(color: context.colors.secondary),
       cursorColor: context.colors.secondary,
-      autofocus: true,
       focusNode: contentFocus,
       initialValue: initialValue,
       decoration: InputDecoration(
@@ -32,7 +31,7 @@ class EditContentFormWidget extends StatelessWidget {
           color: context.colors.secondary,
         ),
       ),
-      minLines: 10,
+      minLines: 8,
       maxLines: 15,
       textCapitalization: TextCapitalization.sentences,
       onFieldSubmitted: (_) => dateFocus.requestFocus(),

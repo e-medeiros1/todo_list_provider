@@ -18,7 +18,6 @@ class EditTitleFormWidget extends StatelessWidget {
     return TextFormField(
       cursorColor: context.colors.secondary,
       initialValue: initialValue,
-      autofocus: true,
       style: TextStyle(
         color: context.colors.secondary,
       ),

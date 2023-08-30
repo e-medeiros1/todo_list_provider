@@ -24,7 +24,7 @@ class ContentFormWidget extends StatelessWidget {
       focus: contentFocus,
       initialValue: initialValue,
       label: 'Descrição',
-      minLines: 10,
+      minLines: 8,
       maxLines: 15,
       textCapitalization: TextCapitalization.sentences,
       onFieldSubmitted: (_) => dateFocus.requestFocus(),

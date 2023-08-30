@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_list_provider/app/core/styles/colors_style.dart';
 
+// ignore: must_be_immutable
 class EditDateFormWidget extends StatelessWidget {
   final FocusNode dateFocus;
   String? initialValue = '';
@@ -17,8 +18,7 @@ class EditDateFormWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      autofocus: true,
-cursorColor: context.colors.secondary,
+      cursorColor: context.colors.secondary,
       focusNode: dateFocus,
       style: TextStyle(
         color: context.colors.secondary,
@@ -45,7 +45,6 @@ cursorColor: context.colors.secondary,
         }
         return null;
       },
-      // onFieldSubmitted: (_) => addTodo(),
       textInputAction: TextInputAction.send,
       onTap: () async {
         final DateTime? date = await showDatePicker(
