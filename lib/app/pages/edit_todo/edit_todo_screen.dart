@@ -36,7 +36,7 @@ class _EditTodoScreenState extends State<EditTodoScreen> with MixinSnackBar {
   final _dateController = TextEditingController();
   final _dateFocus = FocusNode();
 
-  late DateTime todoDate;
+  DateTime todoDate = DateTime.now();
 
   @override
   void dispose() {

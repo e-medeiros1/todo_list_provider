@@ -70,8 +70,6 @@ class TodoController extends ChangeNotifier {
   }
 
   Future<String?> editTodo(TodoModel todoModel) async {
-    todoList.add(todoModel);
-
     final String? error = await saveTodos();
 
     if (error == null) {
@@ -81,13 +79,15 @@ class TodoController extends ChangeNotifier {
     return error;
   }
 
-  // Future deleteTodos(String id) async {
-  //   final error = await _todoLocalStorage.deleteTodos(id);
+  deleteTodos(String id) {
+    int indexToRemove = todoList.indexWhere((obj) => obj.id == id);
 
-  //   notifyListeners();
+    if (indexToRemove != -1) {
+      todoList.removeAt(indexToRemove);
 
-  //   return error;
-  // }
+      notifyListeners();
+    }
+  }
 
   bool isTodoChecked(String id) {
     return doneTodoList.indexWhere((checkedTodoId) => checkedTodoId == id) !=

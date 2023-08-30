@@ -82,12 +82,18 @@ class _TodoHomePageState extends State<TodoHomePage> {
                         onTap: () => Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => EditTodoScreen(
-                                id: todo.id,
-                                title: todo.title,
-                                content: todo.description ?? '',
-                                date: dateFormatted),
+                              id: todo.id,
+                              title: todo.title,
+                              content: todo.description ?? '',
+                              date: dateFormatted,
+                            ),
                           ),
                         ),
+                        onLongPress: () {
+                          setState(() {
+                            controller.deleteTodos(todo.id);
+                          });
+                        },
                         child: ListTile(
                           leading: TodoCheckbox(todo: todo),
                           title: TodoTexts(text: todo.title, fontSize: 18),
