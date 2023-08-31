@@ -7,7 +7,6 @@ import 'package:todo_list_provider/app/core/widgets/todo_checkbox.dart';
 import 'package:todo_list_provider/app/core/widgets/todo_texts.dart';
 import 'package:todo_list_provider/app/mixin/mixin_snack_bar.dart';
 import 'package:todo_list_provider/app/pages/add_todo/add_todo_screen.dart';
-import 'package:todo_list_provider/app/pages/edit_todo/edit_todo_screen.dart';
 
 class TodoHomePage extends StatefulWidget {
   const TodoHomePage({super.key});
@@ -80,25 +79,38 @@ class _TodoHomePageState extends State<TodoHomePage> with MixinSnackBar {
                       final dateFormatted =
                           "${todo.date.day.toString()}/${todo.date.month.toString().padLeft(2, '0')}/${todo.date.year.toString().padLeft(2, '0')}";
                       return InkWell(
-                        onTap: () => Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => EditTodoScreen(
-                              id: todo.id,
-                              title: todo.title,
-                              content: todo.description ?? '',
-                              date: dateFormatted,
-                            ),
-                          ),
-                        ),
                         onLongPress: () => showDialog(
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
-                              title: Text(todo.title),
-                              content: const Text("Deseja excluir tarefa?"),
+                              title: TodoTexts(
+                                text: todo.title,
+                                fontSize: 16,
+                                colorText: context.colors.primary,
+                              ),
+                              content: TodoTexts(
+                                text: "Deseja excluir tarefa?",
+                                fontSize: 15,
+                                colorText: context.colors.primary,
+                              ),
+                              actionsAlignment: MainAxisAlignment.spaceBetween,
                               actions: [
                                 TextButton(
-                                  child: const Text("Excluir"),
+                                  child: TodoTexts(
+                                    text: "Cancelar",
+                                    fontSize: 16,
+                                    colorText: context.colors.primary,
+                                  ),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                                TextButton(
+                                  child: TodoTexts(
+                                    text: "Excluir",
+                                    fontSize: 16,
+                                    colorText: context.colors.primary,
+                                  ),
                                   onPressed: () {
                                     controller.deleteTodos(todo.id);
                                     Navigator.of(context).pop();
@@ -113,9 +125,22 @@ class _TodoHomePageState extends State<TodoHomePage> with MixinSnackBar {
                         ),
                         child: ListTile(
                           leading: TodoCheckbox(todo: todo),
-                          title: TodoTexts(text: todo.title, fontSize: 18),
+                          title: TodoTexts(
+                            text: todo.title,
+                            fontSize: 18,
+                            textDecoration:
+                                controller.doneTodoList.contains(todo.id)
+                                    ? TextDecoration.lineThrough
+                                    : TextDecoration.none,
+                          ),
                           subtitle: TodoTexts(
-                              text: todo.description ?? '', fontSize: 14),
+                            text: todo.description ?? '',
+                            fontSize: 14,
+                            textDecoration:
+                                controller.doneTodoList.contains(todo.id)
+                                    ? TextDecoration.lineThrough
+                                    : TextDecoration.none,
+                          ),
                           trailing:
                               TodoTexts(text: dateFormatted, fontSize: 14),
                         ),

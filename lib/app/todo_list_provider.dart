@@ -16,7 +16,7 @@ class TodoListProvider extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => TodoController(TodoLocalStorage(LocalStorage())),
       child: MaterialApp(
-        title: 'ToDo List',
+        title: 'Meus afazeres',
         theme: ThemeStyle.theme,
         home: const TodoHomePage(),
         debugShowCheckedModeBanner: false,
@@ -24,7 +24,7 @@ class TodoListProvider extends StatelessWidget {
           GlobalMaterialLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate
         ],
-        supportedLocales: const [Locale('pt', 'BR'), Locale('en', 'US')],
+        supportedLocales: const [Locale('pt', 'BR')],
       ),
     );
   }

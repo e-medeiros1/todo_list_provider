@@ -7,6 +7,7 @@ class TodoTexts extends StatelessWidget {
   final double fontSize;
   final TextAlign? textAlign;
   final Color? colorText;
+  final TextDecoration? textDecoration;
 
   const TodoTexts({
     Key? key,
@@ -14,13 +15,19 @@ class TodoTexts extends StatelessWidget {
     required this.fontSize,
     this.textAlign,
     this.colorText,
+    this.textDecoration,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: TextStyle(fontSize: fontSize, color: context.colors.secondary),
+      style: TextStyle(
+        fontSize: fontSize,
+        color: colorText ?? context.colors.secondary,
+        decoration: textDecoration,
+        decorationColor: context.colors.secondary,
+      ),
       textAlign: textAlign,
     );
   }
