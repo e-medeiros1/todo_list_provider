@@ -5,6 +5,7 @@ import 'package:todo_list_provider/app/controllers/todo_controller.dart';
 import 'package:todo_list_provider/app/core/styles/colors_style.dart';
 import 'package:todo_list_provider/app/core/widgets/todo_checkbox.dart';
 import 'package:todo_list_provider/app/core/widgets/todo_texts.dart';
+import 'package:todo_list_provider/app/mixin/mixin_snack_bar.dart';
 import 'package:todo_list_provider/app/pages/add_todo/add_todo_screen.dart';
 import 'package:todo_list_provider/app/pages/edit_todo/edit_todo_screen.dart';
 
@@ -15,7 +16,7 @@ class TodoHomePage extends StatefulWidget {
   State<TodoHomePage> createState() => _TodoHomePageState();
 }
 
-class _TodoHomePageState extends State<TodoHomePage> {
+class _TodoHomePageState extends State<TodoHomePage> with MixinSnackBar {
   bool isLoading = true;
   String? hasError;
 
@@ -89,11 +90,27 @@ class _TodoHomePageState extends State<TodoHomePage> {
                             ),
                           ),
                         ),
-                        onLongPress: () {
-                          setState(() {
-                            controller.deleteTodos(todo.id);
-                          });
-                        },
+                        onLongPress: () => showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text(todo.title),
+                              content: const Text("Deseja excluir tarefa?"),
+                              actions: [
+                                TextButton(
+                                  child: const Text("Excluir"),
+                                  onPressed: () {
+                                    controller.deleteTodos(todo.id);
+                                    Navigator.of(context).pop();
+                                    showSnackBar(
+                                        text: 'Tarefa excluída com sucesso',
+                                        context: context);
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        ),
                         child: ListTile(
                           leading: TodoCheckbox(todo: todo),
                           title: TodoTexts(text: todo.title, fontSize: 18),

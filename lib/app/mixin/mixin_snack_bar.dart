@@ -10,6 +10,7 @@ mixin MixinSnackBar {
       ..clearSnackBars()
       ..showSnackBar(
         SnackBar(
+          duration: const Duration(seconds: 2),
           content: TodoTexts(text: text, fontSize: 14),
         ),
       );
