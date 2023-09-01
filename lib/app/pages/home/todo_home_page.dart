@@ -155,10 +155,10 @@ class _TodoHomePageState extends State<TodoHomePage> with MixinSnackBar {
                       builder: (context) => const AddTodoScreen(),
                     ),
                   ),
-          label: Text(
-            hasError != null ? 'Recarregar' : 'Nova Tarefa',
-            style: TextStyle(color: context.colors.primary, fontSize: 15),
-          ),
+          label: TodoTexts(
+              text: hasError != null ? 'Recarregar' : 'Nova Tarefa',
+              colorText: context.colors.primary,
+              fontSize: 15),
         ),
       ),
     );

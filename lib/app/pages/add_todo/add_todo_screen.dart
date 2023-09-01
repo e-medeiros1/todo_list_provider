@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_list_provider/app/controllers/todo_controller.dart';
 import 'package:todo_list_provider/app/core/styles/colors_style.dart';
+import 'package:todo_list_provider/app/core/widgets/todo_texts.dart';
 import 'package:todo_list_provider/app/mixin/mixin_snack_bar.dart';
 import 'package:todo_list_provider/app/models/todo_model.dart';
 import 'package:todo_list_provider/app/pages/add_todo/widgets/content_form_widget.dart';
@@ -67,7 +68,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> with MixinSnackBar {
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Scaffold(
           appBar: AppBar(
-            title: const Text('Criar tarefa'),
+            title: const TodoTexts(text: 'Criar tarefa', fontSize: 22),
           ),
           body: SingleChildScrollView(
             child: Padding(
@@ -101,10 +102,11 @@ class _AddTodoScreenState extends State<AddTodoScreen> with MixinSnackBar {
             ),
           ),
           floatingActionButton: FloatingActionButton.extended(
-            onPressed: addTodo,
-            label: Text('Salvar tarefa',
-                style: TextStyle(color: context.colors.primary, fontSize: 15)),
-          ),
+              onPressed: addTodo,
+              label: TodoTexts(
+                  text: 'Salvar tarefa',
+                  colorText: context.colors.primary,
+                  fontSize: 15)),
         ),
       ),
     );
