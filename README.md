@@ -1,4 +1,3 @@
-<h2 align="center"> Hero Software - CARROCASH </h2>  
 <p align="center">
       <img src="https://github.com/e-medeiros1/todo_list_provider/assets/73318684/314947b1-c9ee-4a6a-b577-b4b915cfa05e" width="200" alt="Logo TASK LIST"/></br></br>
 
