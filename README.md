@@ -9,7 +9,7 @@
 
 <h2> Sobre </h2></br>
 <p >
- App simplista para estudo do Provider para gerenciamento de estado, persistência de dados, mixins e noções de clean code.
+ App simplista para estudo do Provider como gerenciamento de estado, singletons, persistência de dados, mixins e noções de clean code.
 </p></br>  
 
 ### Funcionalidades</br>
